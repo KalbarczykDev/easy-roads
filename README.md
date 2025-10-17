@@ -142,6 +142,6 @@ Contributions are always welcome
 fork the repository and submit a pull request, 
 or open an issue if you find a bug.
 
-## License 📜
+## License
 
 This project is licensed under the [MIT](LICENSE) License.
