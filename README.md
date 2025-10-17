@@ -1,32 +1,45 @@
-# EasyRoads 🛤️
+# EasyRoads 🛤
 
-**EasyRoads** is a Minecraft Bukkit plugin that enhances player movement by modifying their speed based on their location on predefined roads. This plugin allows server administrators to create custom roads with specific speed attributes.
+**EasyRoads** is a Minecraft Bukkit plugin that enhances player movement by modifying their speed based on their
+location on predefined roads. This plugin allows server administrators to create custom roads with specific speed
+attributes.
 
-## Table of Contents 📚
+## Table of Contents
+
 - [Features](#features)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Commands](#commands)
-- [Permissions](#permissions)
+- [Installation and Usage](#installation-and-usage)
+    - [Installation](#installation)
+    - [Configuration](#configuration)
+    - [Example configuration](#example-configuration)
+    - [Example roads](#example-roads)
+    - [Commands](#commands)
+    - [Permissions](#permissions)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
 
-
-
-## Features ✨
+## Features
 
 - Define roads with specific speeds and blocks.
 - Adjust player and entity movement speeds based on their location on roads.
-- Reload configuration and list roads via in-game commands.
+- Customizable messages for various actions.
+- Simple commands for configuration management and road listing.
+- Lightweight and easy to use.
+- Supports non-player living entities (configurable).
+- Configurable speed increase and decay rates.
+- Detailed configuration options for maximum flexibility.
 
-## Installation 📥
+## Installation And Usage
+
+### Installation
 
 1. Download the latest version of EasyRoads from the releases section.
 2. Place the `EasyRoads.jar` file into your server's `plugins` directory.
 3. Restart or reload your server to enable the plugin.
+4. Configure the plugin by editing the `config.yml` file located in `plugins/EasyRoads/`.
+5.
 
-## Configuration ⚙️
+### Configuration
 
 The plugin uses a configuration file located in `plugins/EasyRoads/config.yml`. Key settings include:
 
@@ -36,7 +49,7 @@ The plugin uses a configuration file located in `plugins/EasyRoads/config.yml`. 
 - `roads`: Define roads with their respective speed and block types.
 - `affectedEntities`: List of entity types affected by the road speeds.
 
-## Example configuration:
+### Example configuration:
 
 ```yaml
 # This is the main configuration file for the plugin
@@ -81,29 +94,47 @@ roads:
   road3:
     speed: 5
     blocks:
-      - Any
+      - ANY
       - STONE_BRICKS
       - GRAVEL
       - COBBLESTONE
       - COBBLESTONE
 ```
-Example roads
-![Screenshot 2024-08-22 at 18 49 22](https://github.com/user-attachments/assets/ea7e2e9c-c0a5-4183-b733-d00eb46a796b)
 
+### Example roads
 
-## Commands 📝
+![Example Road](photos/example.png)
+
+### Commands
+
 ```/easyroads help:``` Display the help message.
 
 ```/easyroads reload``` Reload the plugin configuration.
 
 ```/easyroads list``` List all configured roads.
-## Permissions 🔑
+
+### Permissions
+
 ```easyroads.reload``` Permission to reload the configuration.
 
 ```easyroads.list``` Permission to list all roads.
-## Troubleshooting 🛠️
-If you encounter issues, check the server console for error messages and ensure that the configuration file is correctly formatted. For further assistance, feel free to open an issue on the GitHub repository.
-## Contributing 🤝
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+
+## Troubleshooting
+
+If you encounter issues, check the server console for error messages and ensure that the configuration file is correctly
+formatted. For further assistance, feel free to open an issue on the GitHub repository.
+
+## Contributing
+
+This plugin was originally developed for my own role-playing and world-building server,
+but I decided to share it with the community. 
+I don’t have a specific roadmap for future features, 
+so if you have ideas or improvements, 
+feel free to contribute. 
+Contributions are always welcome
+fork the repository and submit a pull request, 
+or open an issue if you find a bug.
+
 ## License 📜
-This project is licensed under the MIT License.
+
+This project is licensed under the [MIT](LICENSE) License.
