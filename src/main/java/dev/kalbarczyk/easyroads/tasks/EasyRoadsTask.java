@@ -12,13 +12,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import java.util.logging.Logger;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
@@ -44,8 +42,6 @@ public class EasyRoadsTask extends BukkitRunnable {
     private final Map<World, Collection<Entity>> affectedEntitiesMap = new HashMap<>();
     private long tickCounter = 0;
 
-    private final Logger log;
-
     /**
      * Constructs an EasyRoadsTask with the given plugin instance.
      *
@@ -53,7 +49,6 @@ public class EasyRoadsTask extends BukkitRunnable {
      */
     public EasyRoadsTask(EasyRoads plugin) {
         this.plugin = plugin;
-        this.log = plugin.getLogger();
     }
 
     /**
@@ -65,9 +60,9 @@ public class EasyRoadsTask extends BukkitRunnable {
     public void run() {
         Bukkit.getOnlinePlayers().forEach(this::applyAttributeToLivingEntity);
         affectedEntitiesMap.forEach((w, a) -> a.forEach(this::applyAttributeToEntity));
-        if (tickCounter++ % UPDATE_ENTITY_CACHE == 0 && !plugin.getAffectedEntities().isEmpty()) {
+        if (tickCounter++ % UPDATE_ENTITY_CACHE == 0 && !plugin.getConfigState().affectedEntities().isEmpty()) {
             Bukkit.getWorlds().forEach(a -> affectedEntitiesMap.put(a, a.getEntitiesByClasses(
-                    plugin.getAffectedEntities().toArray(new Class[0]))));
+                    plugin.getConfigState().affectedEntities().toArray(new Class[0]))));
         }
     }
 
@@ -97,13 +92,14 @@ public class EasyRoadsTask extends BukkitRunnable {
         if (currentSpeedMod == targetSpeedMod)
             return;
 
-        AttributeInstance attrib = livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+        var attrib = livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+        assert attrib != null;
         attrib.removeModifier(EMPTY_MODIFIER);
 
         if (targetSpeedMod >= currentSpeedMod) {
-            currentSpeedMod = Math.min(currentSpeedMod + plugin.getSpeedIncreaseRate(), targetSpeedMod);
+            currentSpeedMod = Math.min(currentSpeedMod + plugin.getConfigState().speedIncreaseRate(), targetSpeedMod);
         } else {
-            currentSpeedMod = Math.max(currentSpeedMod - plugin.getSpeedDecayRate(), 0);
+            currentSpeedMod = Math.max(currentSpeedMod - plugin.getConfigState().speedDecayRate(), 0);
         }
 
         attrib.addModifier(new AttributeModifier(MODIFIER_UUID, MODIFIER_NAME, currentSpeedMod, Operation.ADD_SCALAR));
@@ -123,14 +119,14 @@ public class EasyRoadsTask extends BukkitRunnable {
         if (tickCounter % UPDATE_ON_ROAD_DIVIDER == livingEntity.getEntityId() % UPDATE_ON_ROAD_DIVIDER) {
             double targetSpeedMod = Double.NEGATIVE_INFINITY;
 
-            for (Road r : plugin.getRoads())
+            for (Road r : plugin.getConfigState().roads())
                 if (r.getSpeedModifier() > targetSpeedMod && r.isRoadBlock(livingEntity.getLocation().getBlock())) {
                     targetSpeedMod = r.getSpeedModifier();
 
 
                     if (livingEntity instanceof Player p) {
                         p.spigot().sendMessage(
-                                ChatMessageType.ACTION_BAR, new TextComponent(plugin.getOnRoadMessage()));
+                                ChatMessageType.ACTION_BAR, new TextComponent(plugin.getConfigState().messages().onRoad()));
                     }
                 }
 

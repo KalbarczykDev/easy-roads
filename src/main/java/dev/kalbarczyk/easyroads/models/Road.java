@@ -28,7 +28,7 @@ public class Road {
      * @param config the configuration section containing road data
      * @param log    the logger to log warnings and errors
      */
-    public Road(ConfigurationSection config, Logger log) {
+    public Road(final ConfigurationSection config,final Logger log) {
         this.speed = config.getDouble("speed", 0.2D);
 
 
@@ -43,9 +43,9 @@ public class Road {
             if (index == -1)
                 index = a.length();
 
-            String material = a.substring(0, index).trim();
-            String data = a.substring(index);
-            Material mat = Material.matchMaterial(material);
+            var material = a.substring(0, index).trim();
+            var data = a.substring(index);
+            var mat = Material.matchMaterial(material);
 
             if (mat == null) {
                 mat = Material.matchMaterial(material, true);
@@ -98,7 +98,7 @@ public class Road {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
         sb.append("Road: ");
         sb.append("Speed=");
         sb.append(speed);

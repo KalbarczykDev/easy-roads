@@ -46,6 +46,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+/**
+ * Main class of the bStats Bukkit Metrics service.
+ */
 public class Metrics {
 
   private final Plugin plugin;
