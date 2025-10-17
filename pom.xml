@@ -6,7 +6,7 @@
 
     <groupId>dev.kalbarczyk</groupId>
     <artifactId>EasyRoads</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2-release</version>
     <packaging>jar</packaging>
 
     <name>EasyRoads</name>
