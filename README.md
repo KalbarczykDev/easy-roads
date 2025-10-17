@@ -37,7 +37,6 @@ attributes.
 2. Place the `EasyRoads.jar` file into your server's `plugins` directory.
 3. Restart or reload your server to enable the plugin.
 4. Configure the plugin by editing the `config.yml` file located in `plugins/EasyRoads/`.
-5.
 
 ### Configuration
 
