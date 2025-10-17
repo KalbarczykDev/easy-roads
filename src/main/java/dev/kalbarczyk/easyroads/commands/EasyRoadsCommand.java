@@ -1,6 +1,6 @@
-package me.tepeshini.easyroads.commands;
+package dev.kalbarczyk.easyroads.commands;
 
-import me.tepeshini.easyroads.EasyRoads;
+import dev.kalbarczyk.easyroads.EasyRoads;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

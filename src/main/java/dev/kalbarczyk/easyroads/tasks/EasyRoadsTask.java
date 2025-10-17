@@ -1,12 +1,12 @@
-package me.tepeshini.easyroads.tasks;
+package dev.kalbarczyk.easyroads.tasks;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import me.tepeshini.easyroads.EasyRoads;
-import me.tepeshini.easyroads.models.Road;
+import dev.kalbarczyk.easyroads.EasyRoads;
+import dev.kalbarczyk.easyroads.models.Road;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;

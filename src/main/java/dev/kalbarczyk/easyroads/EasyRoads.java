@@ -1,12 +1,12 @@
-package me.tepeshini.easyroads;
+package dev.kalbarczyk.easyroads;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import me.tepeshini.easyroads.commands.EasyRoadsCommand;
-import me.tepeshini.easyroads.models.Road;
-import me.tepeshini.easyroads.tasks.EasyRoadsTask;
+import dev.kalbarczyk.easyroads.commands.EasyRoadsCommand;
+import dev.kalbarczyk.easyroads.models.Road;
+import dev.kalbarczyk.easyroads.tasks.EasyRoadsTask;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;

@@ -1,4 +1,4 @@
-package me.tepeshini.easyroads.models;
+package dev.kalbarczyk.easyroads.models;
 
 import java.util.ArrayList;
 import java.util.List;

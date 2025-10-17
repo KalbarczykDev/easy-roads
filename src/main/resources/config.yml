@@ -40,7 +40,7 @@ roads:
   road3:
     speed: 5
     blocks:
-      - Any
+      - ANY
       - STONE_BRICKS
       - GRAVEL
       - COBBLESTONE
