@@ -22,7 +22,15 @@ messages:
 
 # Affected non-player living entities, may affect performance negatively
 # See https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html
-affectedEntities: [ ]
+affectedEntities:
+    - HORSE
+    - DONKEY
+    - MULE
+    - SKELETON_HORSE
+    - ZOMBIE_HORSE
+    - CAMEL
+    - PIG
+    - STRIDER
 
 # Road definitions
 roads:
@@ -31,17 +39,15 @@ roads:
     blocks:
       - DIRT_PATH
   road2:
-    speed: 3
+    speed: 2
     blocks:
-      - ANY
       - GRAVEL
       - COBBLESTONE
       - COBBLESTONE
   road3:
-    speed: 5
+    speed: 3
     blocks:
-      - Any
-      - STONE_BRICKS
+      - ANY
       - GRAVEL
       - COBBLESTONE
       - COBBLESTONE
