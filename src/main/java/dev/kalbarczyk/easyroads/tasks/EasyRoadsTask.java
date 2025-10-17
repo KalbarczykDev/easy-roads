@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import dev.kalbarczyk.easyroads.EasyRoads;
-import dev.kalbarczyk.easyroads.models.Road;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -23,9 +22,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 /**
  * A task that periodically updates the movement speed attribute of entities
  * on roads defined in the EasyRoads plugin.
- * This task runs periodically using Bukkit's scheduler to adjust the speed
- * of entities based on their location on roads and their current speed
- * modifier.
  */
 public class EasyRoadsTask extends BukkitRunnable {
     private static final int UPDATE_ON_ROAD_DIVIDER = 20;
@@ -51,11 +47,6 @@ public class EasyRoadsTask extends BukkitRunnable {
         this.plugin = plugin;
     }
 
-    /**
-     * Executes the task. This method is called periodically by the Bukkit scheduler.
-     * It updates the speed attributes for online players and entities affected by the roads,
-     * and refreshes the cache of affected entities.
-     */
     @Override
     public void run() {
         Bukkit.getOnlinePlayers().forEach(this::applyAttributeToLivingEntity);
@@ -66,23 +57,12 @@ public class EasyRoadsTask extends BukkitRunnable {
         }
     }
 
-    /**
-     * Applies speed attribute changes to the given entity if it is entity valid living entity.
-     *
-     * @param entity the entity to which the speed attribute will be applied
-     */
     private void applyAttributeToEntity(Entity entity) {
         if (entity.isValid() && entity instanceof LivingEntity) {
             applyAttributeToLivingEntity((LivingEntity) entity);
         }
     }
 
-     /**
-     * Applies speed attribute changes to the given living entity.
-     * The entity's movement speed is adjusted towards the target speed defined by the roads.
-     *
-     * @param livingEntity the living entity to which the speed attribute will be applied
-     */
     private void applyAttributeToLivingEntity(LivingEntity livingEntity) {
         double currentSpeedMod = currentSpeedMap.getOrDefault(livingEntity.getUniqueId(), 0D);
         double targetSpeedMod = getTargetSpeed(livingEntity);
@@ -107,21 +87,18 @@ public class EasyRoadsTask extends BukkitRunnable {
         currentSpeedMap.put(livingEntity.getUniqueId(), currentSpeedMod);
     }
 
-    /**
-     * Retrieves the target speed modifier for the given living entity based on its location.
-     * The target speed is determined by the roads in the plugin and is updated periodically.
-     *
-     * @param livingEntity the living entity whose target speed is to be retrieved
-     * @return the target speed modifier for the entity
-     */
+
     private double getTargetSpeed(LivingEntity livingEntity) {
-        // distribute updated entities roughly evenly across the ticks
+
         if (tickCounter % UPDATE_ON_ROAD_DIVIDER == livingEntity.getEntityId() % UPDATE_ON_ROAD_DIVIDER) {
             double targetSpeedMod = Double.NEGATIVE_INFINITY;
 
-            for (Road r : plugin.getConfigState().roads())
-                if (r.getSpeedModifier() > targetSpeedMod && r.isRoadBlock(livingEntity.getLocation().getBlock())) {
-                    targetSpeedMod = r.getSpeedModifier();
+            // Get the block the entity is standing on (subtract a small amount to ensure we're checking below feet)
+            var blockBelowFeet = livingEntity.getLocation().clone().subtract(0, 0.1, 0).getBlock();
+
+            for (var road : plugin.getConfigState().roads()) {
+                if (road.getSpeedModifier() > targetSpeedMod && road.isRoadBlock(blockBelowFeet)) {
+                    targetSpeedMod = road.getSpeedModifier();
 
 
                     if (livingEntity instanceof Player p) {
@@ -129,6 +106,7 @@ public class EasyRoadsTask extends BukkitRunnable {
                                 ChatMessageType.ACTION_BAR, new TextComponent(plugin.getConfigState().messages().onRoad()));
                     }
                 }
+            }
 
             if (targetSpeedMod == Double.NEGATIVE_INFINITY) {
                 targetSpeedMod = 0.0;

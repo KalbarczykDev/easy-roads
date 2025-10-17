@@ -85,20 +85,19 @@ roads:
     blocks:
       - DIRT_PATH
   road2:
+    speed: 2
+    blocks:
+      - GRAVEL
+      - COBBLESTONE
+      - COBBLESTONE
+  road3:
     speed: 3
     blocks:
       - ANY
       - GRAVEL
       - COBBLESTONE
       - COBBLESTONE
-  road3:
-    speed: 5
-    blocks:
-      - ANY
-      - STONE_BRICKS
-      - GRAVEL
-      - COBBLESTONE
-      - COBBLESTONE
+
 ```
 
 ### Example roads

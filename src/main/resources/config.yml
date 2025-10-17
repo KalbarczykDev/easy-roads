@@ -31,17 +31,15 @@ roads:
     blocks:
       - DIRT_PATH
   road2:
-    speed: 3
+    speed: 2
     blocks:
-      - ANY
       - GRAVEL
       - COBBLESTONE
       - COBBLESTONE
   road3:
-    speed: 5
+    speed: 3
     blocks:
       - ANY
-      - STONE_BRICKS
       - GRAVEL
       - COBBLESTONE
       - COBBLESTONE
