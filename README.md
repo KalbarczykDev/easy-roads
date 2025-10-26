@@ -1,6 +1,6 @@
 # EasyRoads 🛤
 
-**EasyRoads** is a Minecraft Bukkit plugin that enhances player movement by modifying their speed based on their
+**EasyRoads** is a Minecraft Spigot plugin that enhances player movement by modifying their speed based on their
 location on predefined roads. This plugin allows server administrators to create custom roads with specific speed
 attributes.
 
